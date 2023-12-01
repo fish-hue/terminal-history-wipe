@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#!/bin/bash
-
 # Clear the history file completely
 cat /dev/null > ~/.bash_history
 
