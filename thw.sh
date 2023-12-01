@@ -14,19 +14,19 @@ else
 fi
 
 # Print a success message
-echo "Terminal history has been cleared successfully."
+echo "User terminal history has been cleared successfully."
 
 # Clear Sudo History
-read -p "Would you like to clear the sudo history? y/N?" sudo_choice
+read -p "Would you like to clear the root history? y/N?" sudo_choice
 
 if [[ "$sudo_choice" =~ ^[Yy]$ ]]; then
-  echo "Clearing sudo history..."
+  echo "Clearing root history..."
   sudo su -c 'cat /dev/null > ~/.bash_history'  # Clear root's history file
   sudo bash -c 'history -c && history -w'       # Clear current user's sudo history
 elif [[ "$sudo_choice" =~ ^[Nn]$ ]]; then
-  echo "Skipping sudo history clearing..."
+  echo "Skipping root history clearing..."
 else
-  echo "Invalid choice. Skipping sudo history clearing..."
+  echo "Invalid choice. Skipping root history clearing..."
 fi
 
 # Exit the current shell
