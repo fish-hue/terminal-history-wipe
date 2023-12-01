@@ -1,16 +1,15 @@
 #!/bin/bash
 
-# Clear the history file
+#!/bin/bash
+
+# Clear the history file completely
+cat /dev/null > ~/.bash_history
+
+# Clear the history entries in memory
 history -c
-
-# Remove the history file
-rm ~/.bash_history
-
-# Create a new history file
-touch ~/.bash_history
-
-# Clear the current session history
-history -r
 
 # Print a success message
 echo "Terminal history has been cleared successfully."
+
+# Exit the current shell
+exit
