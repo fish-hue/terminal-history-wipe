@@ -17,4 +17,3 @@ truncate -s 0 ~/.bash_history || true
 
 echo "Clearing screen..."
 clear
-bash
