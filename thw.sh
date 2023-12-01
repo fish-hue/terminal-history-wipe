@@ -1,33 +1,20 @@
 #!/bin/bash
 
-read -p "Would you like to clear your terminal history? y/N?" choice
+echo "This script will remove all history from your terminal. Are you sure you want to proceed? (y/n)"
+read confirm
 
-if [[ "$choice" =~ ^[Yy]$ ]]; then
-  echo "Clearing terminal history..."
-  history -c && history -w
-elif [[ "$choice" =~ ^[Nn]$ ]]; then
-  echo "Exiting..."
-  exit
-else
-  echo "Invalid choice. Exiting..."
+if [ "$confirm" != "y" ] && [ "$confirm" != "Y" ]; then
+  echo "Exiting script..."
   exit 1
 fi
 
-# Print a success message
-echo "User terminal history has been cleared successfully."
+echo "Removing history..."
+history -c
+rm ~/.bash_history
 
-# Clear Sudo History
-read -p "Would you like to clear the root history? y/N?" sudo_choice
+echo "Deleting contents of ~/.bash_history..."
+truncate -s 0 ~/.bash_history || true
 
-if [[ "$sudo_choice" =~ ^[Yy]$ ]]; then
-  echo "Clearing root history..."
-  sudo su -c 'cat /dev/null > ~/.bash_history'  # Clear root's history file
-  sudo bash -c 'history -c && history -w'       # Clear current user's sudo history
-elif [[ "$sudo_choice" =~ ^[Nn]$ ]]; then
-  echo "Skipping root history clearing..."
-else
-  echo "Invalid choice. Skipping root history clearing..."
-fi
-
-# Exit the current shell
-exit
+echo "Clearing screen..."
+clear
+bash
