@@ -1,19 +1,34 @@
 #!/bin/bash
 
-echo "This script will remove all history from your terminal. Are you sure you want to proceed? (y/n)"
-read confirm
+# Prompt user to confirm deletion of all terminal history
+echo "This script will remove ALL history from your terminal across all sessions."
+echo "Are you sure you want to proceed? (y/n)"
+read -r confirm
 
-if [ "$confirm" != "y" ] && [ "$confirm" != "Y" ]; then
+# Check user input and proceed accordingly
+if [[ "$confirm" != "y" && "$confirm" != "Y" ]]; then
   echo "Exiting script..."
   exit 1
 fi
 
-echo "Removing history..."
+# Clear history for the current session
 history -c
-rm ~/.bash_history
 
-echo "Deleting contents of ~/.bash_history..."
-truncate -s 0 ~/.bash_history || true
+# Remove history files for bash, zsh, etc. (force remove any existing history files)
+rm -f ~/.bash_history ~/.zsh_history ~/.history
 
-echo "Clearing screen..."
+# Create empty history files to replace removed ones
+touch ~/.bash_history ~/.zsh_history ~/.history
+
+# Unset history-related variables and configure the environment to prevent saving
+unset HISTFILE
+export HISTSIZE=0
+export HISTFILESIZE=0
+
+# Optionally clear the terminal screen
 clear
+
+echo "All terminal history has been removed."
+
+# Automatically exit the script to finalize the operation
+exit 0
