@@ -55,7 +55,11 @@ Are you sure you want to proceed? (y/n)
 
 - **Shell Sessions**: Ensure that you run this script in the shell whose history you want to clear. If you are using multiple terminal sessions, they may still hold history, so consider closing them after running the script.
 - **Shell Configuration**: If you're using custom shell configurations, such as `bashrc` or `zshrc`, be aware that certain settings might enable history saving even when executing the script. Review these configurations to prevent undesired behavior.
-
+- **It will save the last session i.e.
+-   cd /terminal-history wipe
+-   ./clear_terminal.sh
+-   exit
+  
 ## Troubleshooting
 
 - If the script seems to leave some history after execution, check for open terminal sessions and close them.
